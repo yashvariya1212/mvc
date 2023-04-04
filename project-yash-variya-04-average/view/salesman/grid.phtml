@@ -1,0 +1,76 @@
+<?php 
+
+$salesmans = $this->salesmans;
+
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>SALESMAN GRID</title>
+	<link rel="stylesheet" type="text/css" href="skin/css/style.css">
+</head>
+<body>
+	<?php require_once 'view/html/header.phtml'; ?>
+	 <div class="managediv">
+			<span class="title">MANAGE SALESMAN</span>
+			<button class="button">
+				<a href="<?php print_r($urlObject->getUrl(NULL,"add")); ?>">ADD SALESMAN</a>
+			</button>
+		</div>
+
+
+		<div> 
+		<table class="managetable">
+			<thead> 
+			<tr>
+					<th>SALESMAN ID</th>
+					<th>FIRST NAME</th>
+					<th>LAST NAME</th>
+					<th>EMAIL</th>
+					<th>GENDER</th>
+					<th>MOBILE</th>
+					<th>STATUS</th>
+					<th>COMPANY</th>
+					<th>CREATED AT</th>
+					<th>UPDATED AT</th>
+					<th>PRICE</th>
+					<th>EDIT</th>
+					<th>DELETE</th>
+			</tr>
+			</thead>
+			<tbody>
+				<?php if (!$salesmans): ?>
+				<tr>
+					<th colspan = '13'> No Data Available.</th>
+				</tr>
+			<?php else: ?>
+					
+				<?php foreach ($salesmans as $row):?>
+				<tr>
+					<td> <?php echo $row->salesman_id; ?> </td>
+					<td> <?php echo $row->first_name; ?> </td>
+					<td> <?php echo $row->last_name; ?> </td>
+					<td> <?php echo $row->email; ?> </td>
+<?php if ($row->gender==1){echo "<td>male</td>";}else{echo "<td>female</td>";}?>
+					<td> <?php echo $row->mobile; ?> </td>
+					<td> <?php echo $row->getStatusText(); ?> </td>
+					<td> <?php echo $row->company; ?> </td>
+					<td> <?php echo $row->created_at; ?> </td>
+					<td> <?php echo $row->updated_at; ?> </td>
+					<td> <a href="<?php print_r($urlObject->getUrl("Salesman_Price","grid",["id"=>$row->salesman_id])); ?>">PRICE</a> </td>
+					<td> <a href="<?php print_r($urlObject->getUrl("Salesman","edit",["id"=>$row->salesman_id])); ?>">EDIT</a> </td>
+					<td> <a href="<?php print_r($urlObject->getUrl("Salesman","delete",["id"=>$row->salesman_id])); ?>">DELETE</a> </td>
+				</tr>
+			<?php endforeach; ?>
+		<?php endif; ?>
+				</tbody>
+			</table>
+			</div>
+	<div class="footer">footer</div>
+
+</body>
+</html>

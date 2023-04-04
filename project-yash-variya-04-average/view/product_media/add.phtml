@@ -1,0 +1,53 @@
+<?php 
+
+$media = $this->media;
+
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADD MEDIA</title>
+	<link rel="stylesheet" type="text/css" href="skin/css/style.css">
+</head>
+<body>
+
+<form action="<?php print_r($urlObject->getUrl(NULL,"insert")); ?>" method="POST" enctype="multipart/form-data" >
+	<table border="1" width="100%" cellpadding="15" style="font-size: 20px;" class="header">
+		<tr class="yash">
+			<td>ADD MEDIA</td>
+			<td><input type="submit" name="submit" value="submit"></td>
+			<td ><a href="<?php print_r($urlObject->getUrl(NULL,"grid")); ?>">CANCEL</a></td>
+		</tr>
+	</table>
+
+
+	<table border="1" width="100%" cellpadding="4" style="font-size: 15px;">
+
+		<tr>
+			<td>name</td>
+			<td> <input type="text" name="img[name]"> </td>
+		</tr>
+		<tr>
+			<?php $statuses = $media->getTable()->getStatusOptions(); ?>
+			<td>status</td>
+			<td>
+				<select name="img[status]">
+				<?php foreach ($statuses as $key => $value) : ?>
+				<option value="<?php echo $key ; ?>"> <?php echo $value; ?></option>
+			<?php endforeach; ?>
+			</select>
+			</td>
+			
+		</tr>
+		<tr>
+			<td>image</td>
+			<td style="padding-left: 85px;"> <input type="file" name="uploadfile" > </td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>

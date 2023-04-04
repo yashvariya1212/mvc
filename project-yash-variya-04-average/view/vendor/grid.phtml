@@ -1,0 +1,75 @@
+<?php 
+
+$vendors = $this->vendors;
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>VENDOR GRID</title>
+	<link rel="stylesheet" type="text/css" href="skin/css/style.css">
+</head>
+<body>
+
+	<?php 
+	require_once 'view/html/header.phtml';
+	?>
+	<div class="managediv">
+		<span class="title">MANAGE VENDOR</span>
+		<button class="button">
+			<a href="<?php print_r($urlObject->getUrl(NULL,"add")); ?>">ADD VENDOR</a>
+		</button>
+	</div>
+
+	<div> 
+		<table class="managetable">
+			<thead> 
+				<tr>
+					<th>VENDOR ID</th>
+					<th>FIRST NAME</th>
+					<th>LAST NAME</th>
+					<th>EMAIL</th>
+					<th>GENDER</th>
+					<th>MOBILE</th>
+					<th>STATUS</th>
+					<th>DISCRIPTION</th>
+					<th>CREATED AT</th>
+					<th>UPDATED AT</th>
+					<th>EDIT</th>
+					<th>DELETE</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php if (!$vendors): ?>
+				<tr>
+					<th colspan = '12'> No Data Available.</th>
+				</tr>
+			<?php else: ?>
+				<?php foreach ($vendors as $row):?>
+					<tr>
+						<td><?PHP echo $row->vendor_id; ?></td>
+						<td><?PHP echo $row->first_name; ?></td>
+						<td><?PHP echo $row->last_name; ?></td>
+						<td><?PHP echo $row->email; ?></td>
+<?php if ($row->gender==1){echo "<td>male</td>";}else{echo "<td>female</td>";}?>
+						<td><?PHP echo $row->mobile; ?></td>
+						<td><?PHP echo $row->getStatusText(); ?></td>
+						<td><?PHP echo $row->discription; ?></td>
+						<td><?PHP echo $row->created_at; ?></td>
+						<td><?PHP echo $row->updated_at; ?></td>
+						<td><a href=" <?php print_r($urlObject->getUrl("Vendor","edit",["id"=>$row->vendor_id])); ?>"> EDIT </a> </td>
+						<td> <a href="<?php print_r($urlObject->getUrl("Vendor","delete",["id"=>$row->vendor_id])); ?>">DELETE</a> </td>
+					</tr>
+				<?php endforeach; ?>
+			<?php endif; ?>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="footer">footer</div>
+
+</body>
+</html>

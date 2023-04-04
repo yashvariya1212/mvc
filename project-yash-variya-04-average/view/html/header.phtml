@@ -1,0 +1,33 @@
+<div class="header" style="background-color:#969696;border: 2px solid black;">
+		<a href="index.php?a=grid&c=Product" class="link">Product</a>
+		<a href="index.php?a=grid&c=category" class="link">Category</a>
+		<a href="index.php?a=grid&c=Customer" class="link">Customer</a>
+		<a href="index.php?a=grid&c=Vendor" class="link">Vendor</a>
+		<a href="index.php?a=grid&c=Salesman" class="link">Salesman</a>
+		<a href="index.php?a=grid&c=Shipping" class="link">Shipping method</a>
+		<a href="index.php?a=grid&c=Payment" class="link">Payment method</a>
+</div>
+
+
+<?php 
+
+require_once 'Model/Core/Message.php';
+require_once 'skin/css/style.css';
+
+
+$messageModel = new Model_Core_Message();
+$messages = $messageModel->getMessage();
+
+if ($messages) {
+	foreach ($messages as $type => $message) {
+		echo "<p class='{$type}'>";
+		echo $message;
+		echo "</p>";
+}
+}
+
+$messageModel->removeMessage();
+
+?>
+
+

@@ -1,0 +1,63 @@
+<?php 
+
+$payments = $this->payments;
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>GRID PAYMENT METHOD</title>
+	<link rel="stylesheet" type="text/css" href="skin/css/style.css">
+</head>
+<body>
+
+	<?php require_once 'view/html/header.phtml'; ?>
+	<div class="managediv">
+		<span class="title">MANAGE PAYMENT METHOD</span>
+		<button class="button">
+			<a href="<?php print_r($urlObject->getUrl(NULL,"add")); ?> ">ADD PAYMENT</a>
+		</button>
+	</div>
+
+
+	<div> 
+		<table class="managetable">
+			<thead> 
+				<tr>
+					<th>PAYMENT METHOD ID</th>
+					<th>NAME</th>
+					<th>STATUS</th>
+					<th>CREATED AT</th>
+					<th>UPDATED AT</th>
+					<th>EDIT</th>
+					<th>DELETE</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php if (!$payments) : ?>
+					<tr>
+						<td colspan = '8'> No Data Availble. </td>
+					</tr>
+				<?php else: ?>
+					<?php foreach ($payments as $row):?>
+						<tr>
+							<td><?PHP echo $row->payment_method_id; ?></td>
+							<td><?PHP echo $row->name; ?></td>
+							<td><?PHP echo $row->getStatusText(); ?></td>
+							<td><?PHP echo $row->created_at; ?></td>
+							<td><?PHP echo $row->updated_at; ?></td>
+							<td><a href="<?php print_r($urlObject->getUrl("Payment","edit",["id"=>$row->payment_method_id])); ?>">EDIT</a> </td>
+							<td><a href="<?php print_r($urlObject->getUrl("Payment","delete",["id"=>$row->payment_method_id])); ?> ">DELETE</a> </td>
+						</tr>
+					<?php endforeach; ?>
+				<?php endif; ?>
+			</tbody>
+		</table>
+	</div>
+	<div class="footer">footer</div>
+
+</body>
+</html>

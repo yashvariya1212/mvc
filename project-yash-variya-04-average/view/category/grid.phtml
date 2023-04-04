@@ -1,0 +1,91 @@
+<?php 
+
+$categories = $this->categorys;
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>CATEGORY GRID</title>
+	<link rel="stylesheet" type="text/css" href="skin/css/style.css">
+</head>
+<body>
+	<?php 
+		require_once 'view/html/header.phtml';
+	?>
+		<div class="managediv">
+			<span class="title">MANAGE CATEGORY</span>
+			<button class="button">
+				<a href=" <?php print_r($urlObject->getUrl(NULL,"add")); ?>">ADD CATEGORY</a>
+			</button>
+		</div>
+
+
+		<div> 
+		<table class="managetable">
+			<thead> 
+			<tr>
+				<th>category id</th>
+				<th>name</th>
+				<th>status</th>
+				<th>discription</th>
+				<th>creted at</th>
+				<th>updated at</th>
+				<th>edit</th>
+				<th>delete</th>
+			</tr>
+			</thead>
+			<tbody> 
+				<?php if (!$categories): ?>
+					<tr>
+						<td colspan="15">No Record Available.</td>
+					</tr>
+				<?php else: ?>
+				<?php foreach($categories as $row): ?>
+
+			<tr>
+				<td><?php echo $row->category_id; ?></td>
+				<td><?php echo $row->name; ?></td>
+				<td><?php echo $row->status; ?></td>
+				<td><?php echo $row->getStatusText(); ?></td>
+				<td><?php echo $row->created_at; ?></td>
+				<td><?php echo $row->updated_at; ?></td>
+				<td> <a href=" <?php print_r($urlObject->getUrl("Category","edit",["id"=>$row->category_id])); ?>">EDIT</a> </td>
+				<td><a href="<?php print_r($urlObject->getUrl("Category","delete",["id"=>$row->category_id])); ?>">DELETE</a></td>
+				</tr>
+			<?php  endforeach; ?>
+		<?php endif; ?>
+				</tbody> 
+		</table>
+		</div>
+	<div class="footer">footer</div>
+</body>
+</html>
+
+<?php 
+
+						// if ($row->parent_id ==NULL) {
+						//  	echo $row->name;
+						//  } 
+						//  else{
+
+						//  	foreach ($categories as $value) {
+						//  		if ($value->category_id == $row->parent_id) {
+						//  			if ($value->parent_id == NULL) {
+						//  				echo $value->name."=>".$row->name ;
+						//  			}
+						//  			else{
+						//  				foreach ($categories as  $subcategories) {
+						//  					if ($subcategories->category_id == $value->parent_id) {
+						//  						echo $subcategories->name."=>".$value->name."=>".$row->name;
+						//  					}
+						//  				}
+						//  			}
+						//  		}
+						//  	}
+						//  }
+
+					?>

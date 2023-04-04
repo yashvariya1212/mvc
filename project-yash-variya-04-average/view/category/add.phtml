@@ -1,0 +1,58 @@
+<?php 
+
+$modelCategory = Index::getModel('Category');
+
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADD CATEGORY</title>
+	<link rel="stylesheet" type="text/css" href="skin/css/style.css">
+</head>
+<body>
+<?php
+		require_once 'view/html/header.phtml';
+?>
+<form action="<?php print_r($urlObject->getUrl("Category","insert")); ?>" method="POST">
+	<div class="managediv">
+		<span>ADD CATEGORY</span>
+		<button class="button" type="submit">SAVE</button>
+		<button class="button"> <a href="<?php print_r($urlObject->getUrl("Category","grid")); ?>">  CANCEL </a></button>
+	</div>
+	<div>
+		<table class="gridtable">
+
+			<tr>
+				<th>name</th>
+				<td> <input type="text" name="category[name]"> </td>
+			</tr>
+			<tr> 
+				<td> status </td>
+				<td> 
+					<?php $statuses = $modelCategory->getStatusOptions(); ?>
+					<select name="category[status]">
+							<option value="">select below</option>
+						<?php foreach ($statuses as $key => $value): ?>
+							<option value="<?php echo $key; ?>"> <?php echo $value; ?> </option>
+						<?php endforeach; ?>
+
+					</select>
+				</td> 
+			</tr>
+			<tr>
+				<th>discription</th>
+				<td> <textarea name="category[discription]"></textarea> </td>
+			</tr>
+		</table>          
+	</div>
+</form>
+<div class="footer">
+	footer
+</div>
+
+</body>
+</html>

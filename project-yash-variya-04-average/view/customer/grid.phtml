@@ -1,0 +1,68 @@
+<?php 
+
+$customers = $this->customers;
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>CUSTOMER GRID</title>
+	<link rel="stylesheet" type="text/css" href="skin\css\style.css">
+</head>
+<body>
+	<?php
+	require_once 'view/html/header.phtml';
+	?>
+	<div class="managediv">
+		<span class="title">MANAGE CUSTOMER</span>
+		<button class="button">
+			<a href=" <?php print_r($urlObject->getUrl(NULL,"add")); ?>">ADD CUSTOMER</a>
+		</button>
+	</div>
+
+
+	<div> 
+		<table class="managetable">
+			<tr>
+				<th>CUSTOMER ID</th>
+				<th>FIRST NAME</th>
+				<th>LAST NAME</th>
+				<th>EMAIL</th>
+				<th>GENDER</th>
+				<th>MOBILE</th>
+				<th>STATUS</th>
+				<th>CREATED AT</th>
+				<th>UPDATED AT</th>
+				<th>EDIT</th>
+				<th>DELETE</th>
+			</tr>
+			<?php if (!$customers): ?>
+				<tr>
+					<th colspan = '11'> No Data Available.</th>
+				</tr>
+			<?php else: ?>
+				<?php foreach ($customers as $row):?>
+					<tr>
+						<td><?PHP echo $row->costomer_id; ?></td>
+						<td><?PHP echo $row->first_name; ?></td>
+						<td><?PHP echo $row->last_name; ?></td>
+						<td><?PHP echo $row->email; ?></td>
+						<?php if ($row->gender == 1) {echo "<td>male</td>";}else {echo "<td>female</td>";}?>
+						<td><?PHP echo $row->mobile; ?></td>
+						<td><?PHP echo $row->getStatusText(); ?></td>
+						<td><?PHP echo $row->created_at; ?></td>
+						<td><?PHP echo $row->updated_at; ?></td>
+						<td><a href=" <?php print_r($urlObject->getUrl("Customer","edit",["id"=>$row->costomer_id])); ?>">EDIT</a> </td>
+						<td><a href=" <?php print_r($urlObject->getUrl("Customer","delete",["id"=>$row->costomer_id])); ?> ">DELETE</a> </td>
+					</tr>
+				<?php endforeach; ?>
+			<?php endif; ?>
+		</table>
+	</div>
+	<div class="footer">footer</div>
+
+</body>
+</html>	

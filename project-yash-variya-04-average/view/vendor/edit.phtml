@@ -1,0 +1,117 @@
+<?php 
+
+$vendors = $this->vendor;
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>EDIT VENDOR</title>
+	<link rel="stylesheet" type="text/css" href="skin/css/style.css">
+</head>
+<body>
+
+	<?php require_once 'view/html/header.phtml'; ?>
+	<form action="<?php print_r($urlObject->getUrl("Vendor","save",["id"=>$vendors->vendor_id])); ?> " method="POST">
+
+		<div class="managediv">
+			<span>EDIT VENDOR</span>
+			<button class="button" type="submit">SAVE</button>
+			<button class="button"><a href="<?php print_r($urlObject->getUrl("Vendor","grid",'',TRUE)); ?> ">CANCEL </a> </button>
+		</div>
+
+		<div>
+			<table class="gridtable">
+				<!-- <tr>
+					<th>vendor_id</th>
+					<td> <input type="text" name= "vendor[vendor_id]" value="<?php echo $vendor->vendor_id; ?>"> </td>
+				</tr> -->
+				<tr>
+					<th>first_name</th>
+					<td> <input type="text" name= "vendor[first_name]" value="<?php echo $vendors->first_name; ?>"> </td>
+				</tr>
+				<tr>
+					<th>last_name</th>
+					<td><input type="text" name="vendor[last_name]" value="<?php echo $vendors->last_name; ?>"> </td>
+				</tr>
+				<tr>
+					<th>email</th>
+					<td><input type="text" name="vendor[email]" value="<?php echo $vendors->email; ?>">  </td>
+				</tr>
+				<tr> 
+					<th> gender </th>
+					<td> 
+						<?php $statuses = [1=>"male",2=>"female"]; ?>
+						<select name="vendor[gender]">
+							<?php foreach ($statuses as $key => $value): ?>
+								<option value="<?php echo $key; ?>"> <?php echo $value; ?> </option>
+							<?php endforeach; ?>
+						</select>
+					</td> 
+				</tr>
+				<tr>
+					<th>mobile</th>
+					<td><input type="number" name="vendor[mobile]" value="<?php echo $vendors->mobile; ?>"> </td>
+				</tr>
+				<tr> 
+					<th> status </th>
+					<td> 
+						<?php $statuses = $vendors->getTable()->getStatusOptions(); ?>
+						<select name="vendor[status]">
+							<option value="">select below</option>
+							<?php foreach ($statuses as $key => $value): ?>
+								<option value="<?php echo $key; ?>"
+
+
+									<?php if ($vendors->getStatus() == $key) {
+										echo "selected";
+									} else {
+										echo "";
+									}
+									 ?>
+
+									> <?php echo $value; ?> </option>
+							<?php endforeach; ?>
+						</select>
+					</td> 
+				</tr>
+				<tr>
+					<th>discription</th>
+					<td> <textarea name="vendor[discription]" ><?php echo $vendors->discription; ?></textarea> </td>
+				</tr>
+			</table>
+			<div>
+		<span class="managediv">
+					EDIT CUSTOMER ADDRESS
+		</span>
+	</div>
+	<table>
+			<tr>
+				<th>address</th>
+				<td> <input type="text" name="vendoraddress[address]" value="<?php echo $vendors->address; ?>"> </td>
+			</tr><tr>
+				<th>city</th>
+				<td> <input type="text" name="vendoraddress[city]" value="<?php echo $vendors->city; ?>"> </td>
+			</tr><tr>
+				<th>state</th>
+				<td> <input type="text" name="vendoraddress[state]" value="<?php echo $vendors->state; ?>"> </td>
+			</tr><tr>
+				<th>country</th>
+				<td> <input type="text" name="vendoraddress[country]" value="<?php echo $vendors->country; ?>"> </td>
+			</tr><tr>
+				<th>zipcode</th>
+				<td> <input type="number" name="vendoraddress[zipcode]" value="<?php echo $vendors->zipcode; ?>"> </td>
+			</tr>
+	</table>
+		</div>
+	</form>
+	
+	<div class="footer">
+		footer
+	</div>
+
+</body>
+</html>

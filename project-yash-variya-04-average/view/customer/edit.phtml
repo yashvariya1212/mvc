@@ -1,0 +1,109 @@
+<?php 
+
+
+$customer = $this->customer;
+
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>EDIT CUSTOMER</title>
+	<link rel="stylesheet" type="text/css" href="skin/css/style.css">
+</head>
+<body>
+	<?php 
+			require_once 'view/html/header.phtml';
+	?>
+	<form action="<?php print_r($urlObject->getUrl("Customer","save",["id"=>$customer->costomer_id])); ?> " method="POST"> 
+		<div class="managediv">
+				<span>EDIT CUSTOMER</span>
+				<button class="button" type="submit">SAVE</button>
+				<button class="button"> <a href="<?php print_r($urlObject->getUrl("Customer","grid",'',TRUE)); ?> ">CANCEL</a></button>
+		</div>
+
+		<div>
+			<table class="gridtable"> 
+			<tr>
+				<th>first name</th>
+				<td> <input type="text" name="customer[first_name]" value="<?php echo $customer->first_name; ?>" > </td>
+			</tr>
+			<tr>
+				<th>last name</th>
+				<td> <input type="text" name="customer[last_name]" value="<?php echo $customer->last_name; ?>" > </td>
+			</tr>
+			<tr>
+				<th>email</th>
+				<td> <input type="text" name="customer[email]" value="<?php echo $customer->email; ?>" > </td>
+			</tr>
+			<tr>
+				<th>gender</th>
+				<td>
+				<?php $genders = [1=>"male",2=>"female"]; ?>
+					<select name="customer[gender]">
+							<option value="">select below</option>
+						<?php foreach ($genders as $key => $value): ?>
+							<option value="<?php echo $key; ?>"> <?php echo $value; ?> </option>
+						<?php endforeach; ?>
+
+					</select>
+				</td> 
+			</tr>
+			<tr>
+				<th>mobile</th>
+				<td> <input type="number" name="customer[mobile]" value="<?php echo $customer->mobile; ?>" > </td>
+			</tr>
+			<tr>
+				<th>status</th>
+				<td>
+					<?php $statuses = $customer->getTable()->getStatusOptions(); ?>
+					<select name="customer[status]">
+						<?php foreach ($statuses as $key => $value) :?>
+						<option value="<?php echo $key; ?>"
+
+							<?php 
+								if ($customer->getStatus() == $key) {
+									echo "selected";
+								} else {
+									echo "";
+								}
+							?>
+							><?php echo $value; ?></option>
+					<?php endforeach; ?>
+					</select>
+				</td>
+			</tr>
+	</table>
+	<div>
+		<span class="managediv">
+					EDIT CUSTOMER ADDRESS
+		</span>
+	</div>
+	<table>
+			<tr>
+				<th>address</th>
+				<td> <input type="text" name="customeraddress[address]" value="<?php echo $customer->address; ?>"> </td>
+			</tr><tr>
+				<th>city</th>
+				<td> <input type="text" name="customeraddress[city]" value="<?php echo $customer->city; ?>"> </td>
+			</tr><tr>
+				<th>state</th>
+				<td> <input type="text" name="customeraddress[state]" value="<?php echo $customer->state; ?>"> </td>
+			</tr><tr>
+				<th>country</th>
+				<td> <input type="text" name="customeraddress[country]" value="<?php echo $customer->country; ?>"> </td>
+			</tr><tr>
+				<th>zipcode</th>
+				<td> <input type="number" name="customeraddress[zipcode]" value="<?php echo $customer->zipcode; ?>"> </td>
+			</tr>
+	</table>
+		</div>
+	</form>
+
+<div class="footer">footer</div>
+
+</body>
+</html>

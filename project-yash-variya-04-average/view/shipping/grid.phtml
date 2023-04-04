@@ -1,0 +1,62 @@
+<?php 
+
+$shippings = $this->shippings;
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>GRID SHIPPING_METHOD</title>
+	<link rel="stylesheet" type="text/css" href="skin/css/style.css">
+</head>
+<body>
+<?php require_once 'view/html/header.phtml'; ?>
+<div class="managediv">
+		<span>MANAGE SHIPPING METHOD</span>
+		<button class="button"> <a href="<?php print_r($urlObject->getUrl(NULL,"add")); ?> ">  ADD SHIPPING METHOD </a></button>
+	</div>
+	<div>
+		<table class="gridtable">
+		<thead>
+			<tr>
+				<th>SHIPPING METHOD ID</th>
+				<th>NAME</th>
+				<th>AMOUNT</th>
+				<th>STATUS</th>
+				<th>CREATED AT</th>
+				<th>UPDATED AT</th>
+				<th>EDIT</th>
+				<th>DELETE</th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php if (!$shippings): ?>
+				<tr>
+						<td colspan="8">No Record Available.</td>
+					</tr>
+			<?php else: ?>
+				<?php foreach ($shippings as $row): ?>
+				<tr>
+					<td> <?php echo $row->shipping_method_id; ?> </td>
+					<td> <?php echo $row->name; ?> </td>
+					<td> <?php echo $row->amount; ?> </td>
+					<td> <?php echo $row->getStatusText(); ?> </td>
+					<td> <?php echo $row->created_at; ?> </td>
+					<td> <?php echo $row->updated_at; ?> </td>
+					<td><a href="<?php print_r($urlObject->getUrl("Shipping","edit",["id"=>$row->shipping_method_id])); ?>">EDIT</a></td>
+					<td> <a href="<?php print_r($urlObject->getUrl("Shipping","delete",["id"=>$row->shipping_method_id])); ?> ">DELETE</a> </td>
+				</tr>
+			<?php endforeach; ?>
+		<?php endif; ?>
+			</tbody>
+		</table>          
+	</div>
+</form>
+<div class="footer">
+	footer
+</div>
+</body>
+</html>

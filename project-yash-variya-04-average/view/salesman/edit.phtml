@@ -1,0 +1,106 @@
+<?php 
+
+$salesmans = $this->salesman;
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>EDIT SALESMAN</title>
+	<link rel="stylesheet" type="text/css" href="skin/css/style.css">
+</head>
+<body>
+	<?php require_once 'view/html/header.phtml'; ?>
+	<form action="<?php print_r($urlObject->getUrl("Salesman","save",["id"=>$salesmans->salesman_id])); ?>" method="POST">
+	<div class="managediv">
+		<span>EDIT SALESMAN</span>
+		<button class="button" type="submit">SAVE</button>
+		<button class="button"> <a href="<?php print_r($urlObject->getUrl("Salesman","grid",'',TRUE)); ?>">  CANCEL </a></button>
+	</div>
+	<div>
+		<table class="gridtable">
+
+			<!-- <tr>
+				<th>salesman id</th>
+				<td> <input type="text" name="salesman[salesman_id]" value="<?php echo $salesmans->salesman_id; ?>"> </td>
+			</tr> -->
+			<tr>
+				<th>first name</th>
+				<td> <input type="text" name="salesman[first_name]" value="<?php echo $salesmans->first_name; ?>"> </td>
+			</tr>
+			<tr>
+				<th>last name</th>
+				<td> <input type="text" name="salesman[last_name]" value="<?php echo $salesmans->last_name; ?>"> </td>
+			</tr>
+			<tr>
+				<th>email</th>
+				<td> <input type="text" name="salesman[email]" value="<?php echo $salesmans->email; ?>"> </td>
+			</tr>
+			<tr>
+				<th>gender</th>
+				<td>
+				<?php $genders = [1=>"male",2=>"female"]; ?>
+					<select name="salesman[gender]">
+						<?php foreach ($genders as $key => $value): ?>
+							<option value="<?php echo $key; ?>"> <?php echo $value; ?> </option>
+						<?php endforeach; ?>
+
+					</select>
+				</td> 
+			</tr>
+			<tr>
+				<th>mobile</th>
+				<td> <input type="number" name="salesman[mobile]" value="<?php echo $salesmans->mobile; ?>"> </td>
+			</tr>
+			<tr> 
+				<th> status </th>
+				<td> 
+					<?php $statuses = [1=>"active",2=>"inactive"]; ?>
+					<select name="salesman[status]">
+							<option value="">select below</option>
+						<?php foreach ($statuses as $key => $value): ?>
+							<option value="<?php echo $key; ?>"> <?php echo $value; ?> </option>
+						<?php endforeach; ?>
+
+					</select>
+				</td> 
+			</tr>
+			<tr>
+				<th>company</th>
+				<td> <input type="text" name="salesman[company]" value="<?php echo $salesmans->company; ?>"> </td>
+			</tr>
+		</table> 
+		<div>
+		<span class="managediv">
+					EDIT SALESMAN ADDRESS
+		</span>
+	</div>
+	<table>
+			<tr>
+				<th>address</th>
+				<td> <input type="text" name="salesmanaddress[address]" value="<?php echo $salesmans->address; ?>"> </td>
+			</tr><tr>
+				<th>city</th>
+				<td> <input type="text" name="salesmanaddress[city]" value="<?php echo $salesmans->city; ?>"> </td>
+			</tr><tr>
+				<th>state</th>
+				<td> <input type="text" name="salesmanaddress[state]" value="<?php echo $salesmans->state; ?>"> </td>
+			</tr><tr>
+				<th>country</th>
+				<td> <input type="text" name="salesmanaddress[country]" value="<?php echo $salesmans->country; ?>"> </td>
+			</tr><tr>
+				<th>zipcode</th>
+				<td> <input type="number" name="salesmanaddress[zipcode]" value="<?php echo $salesmans->zipcode; ?>"> </td>
+			</tr>
+	</table>         
+	</div>
+</form>
+<div class="footer">
+	footer
+</div>	
+
+</body>
+</html>

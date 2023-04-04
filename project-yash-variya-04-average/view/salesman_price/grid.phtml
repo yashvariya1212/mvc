@@ -1,0 +1,107 @@
+<?php 
+
+// echo "<pre>";
+// print_r($this);
+// die();
+
+$prices = $this->prices;
+$salesmen = $this->salesmen;
+$id = Index::getModel('Core_Request')->getParam('id');
+// $salesmanname =  $this->getDropdown();
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>salesman price</title>
+	<link rel="stylesheet" type="text/css" href="skin/css/style.css">
+</head>
+<body>
+	<form action="<?php print_r($urlObject->getUrl(NULL,"update")); ?>" method="POST">
+	<table  width="100%" cellpadding="20" style="font-size: 30px;" class="header">
+		<tr class="yash" >
+			<td >Salesman:
+				
+
+				<select onchange="changeSalesman(this.value)">
+        <?php foreach ($salesmen as $name): ?>
+        <option <?php if ($name->salesman_id == $id){echo "selected";} ?> value = <?php echo $name->salesman_id; ?> >
+          <?php echo $name->first_name;?></option>
+        <?php endforeach;?>
+      </select>
+
+			</td>
+			<td ><a href="<?php print_r($urlObject->getUrl("Salesman","grid",NULL,TRUE)); ?>">BACK</a></td>
+			<td ><input type="submit" value="UPDATE"></td>
+			<td ><a href="" >DELETE</a></td>
+		</tr>
+	</table>
+	<table  border="1" width="100%" style="text-align: center;">
+		<thead> 
+			<tr>
+				<th>ENTITY ID</th>    
+				<th>PRODUCT ID</th>    
+				<th>NAME</th>
+				<th>SKU</th>
+				<th>COST</th>
+				<th>PRICE</th>
+				<th>SALESMAN PRICE</th>
+				<th>REMOVE</th>
+			</tr>
+		</thead>
+		<tbody> 
+			<?php foreach ($prices as $row): ?>
+			<tr>
+				<td><?php  echo $row->entity_id; ?></td>
+				<td><?php  echo $row->product_id; ?></td>
+				<td><?php echo $row->product_name; ?></td>
+				<td><?php echo $row->sku; ?></td>
+				<td><?php echo $row->cost; ?></td>
+				<td><?php echo $row->price; ?></td>
+				<td> <input  style="text-align:center;" name="salesman_price[<?php echo $row->product_id;?>]" value="<?php echo $row->salesman_price; ?>">  </td>
+				<td> <input type="checkbox" name="">  </td>
+			</tr>
+		<?php endforeach; ?>
+		</tbody>
+		<script type="text/javascript">
+        function changeSalesman(salesman_id){
+          window.location.href = "Index.php?c=salesman_price&a=grid&id="+salesman_id;
+        }
+      </script>
+
+	</table>
+
+
+</form>
+
+<!-- <script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	 $(document).ready(function (){
+
+	 		function loadData(){
+	 			$.ajax({
+
+	 				url: "load-cs.php",
+	 				type : "POST",
+	 				success : function(data){
+	 					$("#Salesman").append(data); 
+	 				}
+
+	 			});
+	 		}
+
+	 		loadData();
+	 });
+</script> -->
+<script type="text/javascript">
+		function changeSalesman(salesman_id) {
+			window.location.href = "index.php?a=grid&c=salesman_price&id="+salesman_id;  
+		}
+	</script>
+
+
+</body>
+</html>

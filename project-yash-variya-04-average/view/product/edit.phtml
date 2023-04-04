@@ -1,0 +1,85 @@
+<?php 
+
+$product = $this->product;
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>product edit</title>
+	<link rel="stylesheet" type="text/css" href="skin/css/style.css">
+</head>
+<body>
+	<?php require_once 'view/html/header.phtml'; ?>
+	<form action=" <?php print_r($urlObject->getUrl("Product","save",["id"=>$product->product_id])); ?>" method="POST"> 
+		<div class="managediv">
+				<span>EDIT PRODUCT</span>
+				<button class="button" type="submit">SAVE</button>
+				<button class="button"> <a href=" <?php print_r($urlObject->getUrl("Product","grid",'',TRUE)); ?>">CANCEL</a></button>
+		</div>
+
+		<div>
+			<table class="gridtable"> 
+			<tr> 
+				<td>product name</td>
+				 <td> <input type="text" name="product[product_name]" value="<?php echo $product->product_name ; ?>"> </td> 
+			 </tr>
+			<tr> 
+				<td>cost</td>
+				 <td> <input type="number" name="product[cost]" value="<?php echo $product->cost ; ?>"> </td> 
+			 </tr>
+			<tr> 
+				<td>price</td>
+				 <td> <input type="number" name="product[price]" value="<?php echo $product->price ; ?>"> </td> 
+			 </tr>
+			<tr> 
+				<td>sku</td>
+				 <td> <input type="number" name="product[sku]" value="<?php echo $product->sku ?>"> </td> 
+			 </tr>
+			<tr> 
+                <th> status </th>
+                <td> 
+						<?php $statuses = $product->getTable()->getStatusOptions(); ?>
+
+                    <select name="product[status]">
+                        <?php foreach ($statuses as $key => $value): ?>
+                            <option value="<?php echo $key; ?>"
+
+                            	<?php
+                            			if ($product->getStatus() == $key) {
+                            				echo "selected";
+                            			} else {
+                            				echo "";
+                            			}
+                            	 ?>
+                            	> <?php echo $value; ?> </option>
+                        <?php endforeach; ?>
+
+                    </select>
+                </td> 
+            </tr>
+			<tr> 
+				<td>quantity</td>
+				 <td> <input type="text" name="product[quantity]" value="<?php echo $product->quantity ; ?>"> </td> 
+			 </tr>
+			 <tr> 
+				<td>discription</td>
+				 <td> <input type="text" name="product[discription]" value="<?php echo $product->discription ; ?>"> </td> 
+			 </tr>
+			 <tr> 
+				<td>color</td>
+				 <td> <input type="text" name="product[color]" value="<?php echo $product->color ; ?>"> </td> 
+			 </tr>
+			 <tr> 
+				<td>material</td>
+				 <td> <input type="text" name="product[material]" value="<?php echo $product->material ; ?>"> </td> 
+			 </tr>
+	</table>
+
+		</div>
+		<?php require_once 'view/html/footer.phtml'; ?>
+	</form>
+</body>
+</html>

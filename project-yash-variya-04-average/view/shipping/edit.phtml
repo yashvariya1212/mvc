@@ -1,0 +1,63 @@
+<?php 
+
+$shipping = $this->shipping;
+
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>EDIT SHIPPING METHOD</title>
+	<link rel="stylesheet" type="text/css" href="skin/css/style.css">
+</head>
+<body>
+<?php require_once 'view/html/header.phtml'; ?>
+<form action="<?php print_r($urlObject->getUrl("Shipping","save",["id"=>$shipping->shipping_method_id])); ?>" method="POST">
+	<div class="managediv">
+		<span>EDIT SHIPPING METHOD</span>
+		<button class="button" type="submit">SAVE</button>
+		<button class="button"> <a href=" <?php print_r($urlObject->getUrl("Shipping","grid",'',TRUE)); ?> ">  CANCEL </a></button>
+	</div>
+	<div>
+		<table class="gridtable">
+
+			<tr>
+				<th>name</th>
+				<td> <input type="text" name="shipping[name]" value="<?php echo $shipping->name; ?>"> </td>
+			</tr>
+			<tr>
+				<th>amount</th>
+				<td> <input type="number" name="shipping[amount]" value="<?php echo $shipping->amount; ?>"> </td>
+			</tr>
+			<tr> 
+				<th> status </th>
+				<td> 
+					<?php $statuses = $shipping->getTable()->getStatusOptions(); ?>
+					<select name="shipping[status]">
+						<?php foreach ($statuses as $key => $value): ?>
+							<option value="<?php echo $key; ?>"
+
+
+								<?php if ($shipping->getStatus() == $key) {
+									echo "selected";
+								} else {
+									echo "";
+								}
+								 ?>
+								> <?php echo $value; ?> </option>
+						<?php endforeach; ?>
+
+					</select>
+				</td> 
+			</tr>
+		</table>          
+	</div>
+</form>
+<div class="footer">
+	footer
+</div>
+</body>
+</html>

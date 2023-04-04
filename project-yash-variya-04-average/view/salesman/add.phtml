@@ -1,0 +1,107 @@
+<?php 
+
+$salesmans = $this->salesman;
+
+echo "<pre>";
+print_r($salesmans);
+die();
+
+?>
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ADD SALESMAN</title>
+	<link rel="stylesheet" type="text/css" href="skin/css/style.css">
+</head>
+<body>
+<?php require_once 'view/html/header.phtml'; ?>
+<form action="<?php print_r($urlObject->getUrl("Salesman","save")); ?> " method="POST">
+	<div class="managediv">
+		<span>ADD SALESMAN</span>
+		<button class="button" type="submit">SAVE</button>
+		<button class="button"> <a href="<?php print_r($urlObject->getUrl("Salesman","grid")); ?> ">  CANCEL </a></button>
+	</div>
+	<div>
+		<table class="gridtable">
+
+			<tr>
+				<th>first name</th>
+				<td> <input type="text" name="salesman[first_name]"> </td>
+			</tr>
+			<tr>
+				<th>last name</th>
+				<td> <input type="text" name="salesman[last_name]"> </td>
+			</tr>
+			<tr>
+				<th>email</th>
+				<td> <input type="text" name="salesman[email]"> </td>
+			</tr>
+			<tr>
+				<th>gender</th>
+				<td>
+				<?php $genders = [1=>"male",2=>"female"]; ?>
+					<select name="salesman[gender]">
+						<?php foreach ($genders as $key => $value): ?>
+							<option value="<?php echo $key; ?>"> <?php echo $value; ?> </option>
+						<?php endforeach; ?>
+
+					</select>
+				</td> 
+			</tr>
+			<tr>
+				<th>mobile</th>
+				<td> <input type="number" name="salesman[mobile]"> </td>
+			</tr>
+			<tr> 
+				<th> status </th>
+				<td> 
+					<?php $statuses = [1=>"active",2=>"inactive"]; ?>
+					<select name="salesman[status]">
+							<option value="">select below</option>
+						<?php foreach ($statuses as $key => $value): ?>
+							<option value="<?php echo $key; ?>"> <?php echo $value; ?> </option>
+						<?php endforeach; ?>
+
+					</select>
+				</td> 
+			</tr>
+			<tr>
+				<th>company</th>
+				<td> <input type="text" name="salesman[company]"> </td>
+			</tr>
+		</table>  
+		<div>
+			<span class="managediv">
+				ADD SALSEMAN ADDRESS
+			</span>
+		</div>
+		<table class="gridtable">
+			<tr>
+				<th>address</th>
+				<td> <input type="text" name="salesmanaddress[address]"> </td>
+			</tr><tr>
+				<th>city</th>
+				<td> <input type="text" name="salesmanaddress[city]"> </td>
+			</tr><tr>
+				<th>state</th>
+				<td> <input type="text" name="salesmanaddress[state]"> </td>
+			</tr><tr>
+				<th>country</th>
+				<td> <input type="text" name="salesmanaddress[country]"> </td>
+			</tr><tr>
+				<th>zipcode</th>
+				<td> <input type="number" name="salesmanaddress[zipcode]"> </td>
+			</tr>
+		</table>           
+	</div>
+</form>
+<div class="footer">
+	footer
+</div>
+</body>
+</html>
